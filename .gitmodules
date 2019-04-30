@@ -1,0 +1,3 @@
+[submodule "bookstore"]
+	path = bookstore
+	url = https://github.com/DukeNgn/bookStore.git
