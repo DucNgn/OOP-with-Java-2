@@ -207,6 +207,11 @@ public class CellListUtilization {
 			System.out.println("\nDisplaying the fake list after making changes");
 			faker.showContents();
 			System.out.println("Comparing fake list now with the original. Result of equals is " + list.equals(faker));
+			
+			System.out.println("=====NOW TEST WITH AN OBJECT THAT IS NOT A CELL LIST==="); 
+			System.out.println("CREATING AN ARRAY OF CELLPHONE <NOT A CELLIST OBJECT>");
+			CellPhone[] a = new CellPhone[6];
+			System.out.println("Comparing the cellphone array with the celllist. The result is " + list.equals(a));
 			break;
 			
 		default: 

@@ -71,7 +71,7 @@ import java.io.File;
 		size =0;
 	}
 	
-	public CellList(CellList passed) {  //copy constructor //WORKS //DEEP COPY
+	public CellList(CellList passed) {  //copy constructor //DEEP COPY
 		//MANUALLY
 		this.size = passed.size;
 		if(passed.head == null) {
@@ -148,13 +148,13 @@ import java.io.File;
 		return counter;
 	}
 	*/
-	
-	public void addToStart(CellPhone obj) {  //CHECKED: WORK
+
+	public void addToStart(CellPhone obj) {  //CHECKED
 		size++;
 		head = new CellNode(obj, head);
 	}
-	
-	public boolean insertAtIndex(CellPhone obj, int post) {  //CHECKED: WORK. NEED CHECK AGAIN FOR SIMPLICITY
+
+	public boolean insertAtIndex(CellPhone obj, int post) {  //CHECKED
 		try {
 			if(post > size || post <0) {
 				throw new NoSuchElementException();
@@ -237,7 +237,7 @@ import java.io.File;
 		}
 	}
 	
-	public boolean deleteFromStart() {  //CHECKED: WORK
+	public boolean deleteFromStart() {  //CHECKED
 		if(head == null) {
 			return false; //the array is already empty
 		} else {
@@ -247,7 +247,7 @@ import java.io.File;
 		}
 	}
 	
-	public void replaceAtIndex(CellPhone obj, int post) {  //CHECKED: WORK. NEED SIMPLICITY
+	public void replaceAtIndex(CellPhone obj, int post) {  //CHECKED
 		if(post < 0|| post > size -1 || this.head == null) {
 			return;
 		}
@@ -276,7 +276,7 @@ import java.io.File;
 		}
 	}
 	
-	public CellPhone find(long serialNum) {  //CHECKED: need check
+	public CellPhone find(long serialNum) {  //CHECKED
 		iteration = 0;
 		CellNode index = head;
 		while(index!= null) {
@@ -289,7 +289,7 @@ import java.io.File;
 		return null; //reach this means the serialNum was not in the list
 	}
 	
-	public boolean canAdd(CellPhone obj) {  //quite good. need check again for simplicity
+	public boolean canAdd(CellPhone obj) {
 		if(obj == null) {
 			return false;
 		}
@@ -310,12 +310,12 @@ import java.io.File;
 		return true;
 	}
 	
-	public boolean contains(long serialNum) { //CHECKED: WORK
+	public boolean contains(long serialNum) { //CHECKED
 		if(this.find(serialNum) != null) { return true;
 		} else {return false;}
 	}
 	
-	public void showContents() {  //CHECKED: WORK
+	public void showContents() {  //CHECKED
 		System.out.println("The current size of the list is " + size + ". Here are the contents of the list\n"
 				+          "=================================================================");
 		if(size == 0) { System.out.println(" ---> x"); } 
@@ -336,19 +336,24 @@ import java.io.File;
 		}
 	}
 
-	public boolean equals(CellList other) {  //good
-		if(other.getSize() != this.size) {
+	public boolean equals(Object o) { //CHECKED
+		if(o.getClass() != this.getClass() || o == null) {
 			return false;
-		}
-		CellNode index = head;
-		CellNode otherIndex = other.head;
-		while(index != null) {
-			if(index.cell.equals(otherIndex.cell) == false) {
+		} else {
+			CellList other = (CellList)o;
+			if(other.getSize() != this.size) {
 				return false;
 			}
-			index = index.next;
-			otherIndex = otherIndex.next;
+			CellNode index = head;
+			CellNode otherIndex = other.head;
+			while(index != null) {
+				if(index.cell.equals(otherIndex.cell) == false) {
+					return false;
+				}
+				index = index.next;
+				otherIndex = otherIndex.next;
+			}
+			return true;
 		}
-		return true;
 	}
 }
